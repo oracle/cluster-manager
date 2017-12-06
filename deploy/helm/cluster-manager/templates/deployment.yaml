@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "name" . }}
+  namespace: {{ .Values.federationHostNamespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}cluster-manager:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: "{{ .Values.awsAccessKeyId }}"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "{{ .Values.awsSecretAccessKey }}"
+        - name: OKE_BEARER_TOKEN
+          value: "{{ .Values.okeBearerToken }}"
+        - name: OKE_AUTH_GROUP
+          value: "{{ .Values.okeAuthGroup }}"
+        - name: OKE_CLOUD_AUTH_ID
+          value: "{{ .Values.okeCloudAuthId }}"
+        command:
+        - /cluster-manager
+        {{- if (not (empty .Values.glogLevel)) }}
+        - --v={{ .Values.glogLevel }}
+        {{- end }}
+        - --domain={{ .Values.domain }}
+        - --fkubeApiServer={{ .Values.federationEndpoint }}
+        {{- if (not (empty .Values.federationContext)) }}
+        - --fkubeName={{ .Values.federationContext }}
+        {{- end }}
+        {{- if (not (empty .Values.federationNamespace)) }}
+        - --fkubeNamespace={{ .Values.federationNamespace }}
+        {{- end }}
+        {{- if (not (empty .Values.okeApiHost)) }}
+        - --okeApiHost={{ .Values.okeApiHost }}
+        {{- end }}
+        - --statestore={{ .Values.statestore }}
+        volumeMounts:
+        - mountPath: /etc/federation/controller-manager
+          name: {{ .Values.federationContext }}-controller-manager-kubeconfig
+          readOnly: true
+      serviceAccountName: federation-controller-manager
+      serviceAccount: federation-controller-manager
+      volumes:
+      - name: {{ .Values.federationContext }}-controller-manager-kubeconfig
+        secret:
+          secretName: {{ .Values.federationContext }}-controller-manager-kubeconfig

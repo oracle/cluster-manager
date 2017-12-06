@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cluster-manager
+  namespace: federation-system
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cluster-manager
+    spec:
+      containers:
+      - name: cluster-manager
+        image: $CLUSTER_MANAGER_IMAGE
+        imagePullPolicy: Always
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: "$AWS_ACCESS_KEY_ID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "$AWS_SECRET_ACCESS_KEY"
+        - name: OKE_BEARER_TOKEN
+          value: "$OKE_BEARER_TOKEN"
+        - name: OKE_AUTH_GROUP
+          value: "$OKE_AUTH_GROUP"
+        - name: OKE_CLOUD_AUTH_ID
+          value: "$OKE_CLOUD_AUTH_ID"
+        command:
+        - /cluster-manager
+        - --v=2
+        - --domain=$DOMAIN
+        - --fkubeApiServer=https://$FEDERATION_CONTEXT-apiserver
+        - --fkubeName=$FEDERATION_CONTEXT
+        - --fkubeNamespace=$FEDERATION_NAMESPACE
+        - --okeApiHost=api.cluster.us-ashburn-1.oracledx.com
+        - --statestore=$KOPS_STATE_STORE
+        volumeMounts:
+        - mountPath: /etc/federation/controller-manager
+          name: $FEDERATION_CONTEXT-controller-manager-kubeconfig
+          readOnly: true
+      serviceAccountName: federation-controller-manager
+      serviceAccount: federation-controller-manager
+      volumes:
+      - name: $FEDERATION_CONTEXT-controller-manager-kubeconfig
+        secret:
+          secretName: $FEDERATION_CONTEXT-controller-manager-kubeconfig

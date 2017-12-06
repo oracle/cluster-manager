@@ -1,0 +1,17 @@
+apiVersion: federation/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    cluster-manager.n6s.io/cluster.class: oke
+    cluster-manager.n6s.io/cluster.config: '{ "provider": "oke", "nodeZones": ["AD-1","AD-2","AD-3"], "shape": "VM.Standard1.1", "workersPerAD": "1", "compartment": "ocid1.compartment.oc1..blahblahblahblah" }'
+    n6s.io/cluster.lifecycle.state: offline
+  labels:
+    geo: us-west
+    region: us-west-phx
+    provider: oke
+    speed: fast
+  name: akube-oke
+spec:
+  serverAddressByClientCIDRs:
+  - clientCIDR: 0.0.0.0/0
+    serverAddress:   https://213.0.0.1

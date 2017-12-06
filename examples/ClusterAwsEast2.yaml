@@ -1,0 +1,17 @@
+apiVersion: federation/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    cluster-manager.n6s.io/cluster.class: kops
+    cluster-manager.n6s.io/cluster.config: '{ "provider": "aws", "region": "us-east-2", "masterZones": ["us-east-2a"], "nodeZones": ["us-east-2a"], "masterSize": "t2.small", "nodeSize": "t2.micro", "numberOfMasters": "1", "numberOfNodes": "3", "sshkey": "ssh-rsa SSHPublicKey..." }'
+    n6s.io/cluster.lifecycle.state: offline
+  labels:
+    geo: us-east
+    region: us-east-2
+    provider: aws
+    speed: fast
+  name: akube-us-east-2
+spec:
+  serverAddressByClientCIDRs:
+  - clientCIDR: 0.0.0.0/0
+    serverAddress: https://213.0.0.1

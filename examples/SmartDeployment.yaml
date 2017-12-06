@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-node
+  annotations:
+      odx.io/gas-scheduler: '{"rebalance": true, "enabled": true}'
+      federation.alpha.kubernetes.io/cluster-selector: '[{"key": "speed", "operator":
+        "In", "values": ["fast"]}, {"key": "geo", "operator":
+        "In", "values": ["us-east","us-west"]}]'
+spec:
+  replicas: 100
+  template:
+    metadata:
+      labels:
+        app: hello-node-app
+    spec:
+      containers:
+      - name: hello-node
+        image: docker.io/vitaliyzinchenko/hello-node:v1
+        ports:
+        - containerPort: 8080
