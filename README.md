@@ -17,6 +17,7 @@ determines on which cluster to perform the operation depending on the demand and
 <img src="overview.png" alt="cluster-manager with Navarkos" width="80%" height="80%"/>
 <figcaption>Figure:1 cluster-manager with Navarkos Architecture</figcaption>
 <br>
+<br>
 
 The Cluster Manager supports the following operations on clusters:
 
