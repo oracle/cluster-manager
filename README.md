@@ -1,4 +1,3 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/oracle/kubernetes-incubator/cluster-manager)](http://goreportcard.com/report/github.com/oracle/kubernetes-incubator/cluster-manager)
 # Cluster Manager
 
 Cluster Manager manages the life cycle of Kubernetes clusters from different cloud providers.
@@ -40,7 +39,7 @@ Clone the source to a local repository
 export K8S_INCUBATOR_DIR="$GOPATH/src/github.com/kubernetes-incubator"
 mkdir -p $K8S_INCUBATOR_DIR
 cd $K8S_INCUBATOR_DIR
-git clone https://github.com/oracle/kubernetes-incubator/navarkos
+git clone https://github.com/oracle/cluster-manager
 ```
 
 ### Build Project
