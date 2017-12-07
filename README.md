@@ -22,9 +22,9 @@ determines on which cluster to perform the operation depending on the demand and
 The Cluster Manager supports the following operations on clusters:
 
 1. Provisioning: Cluster Manager can create a new Kubernetes cluster on a cloud provider.
-1. Scale Up: Cluster Manager can scale up nodes on a currently provisioned cluster on any supported cloud provider
-1. Scale Down: Cluster Manager can scale down nodes on a currently provisioned cluster on any supported cloud provider
-1. Shutdown: Cluster Manager can shutdown a currently provisioned cluster on any supported cloud provider
+1. Scale Up: Cluster Manager can scale up nodes on a currently provisioned cluster on any supported cloud provider.
+1. Scale Down: Cluster Manager can scale down nodes on a currently provisioned cluster on any supported cloud provider.
+1. Shutdown: Cluster Manager can shutdown a currently provisioned cluster on any supported cloud provider.
 
 
 ## Build
