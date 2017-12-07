@@ -27,9 +27,6 @@ The Cluster Manager supports the following operations on clusters:
 1. Shutdown: Cluster Manager can shutdown a currently provisioned cluster on any supported cloud provider
 
 
-## Deploy
-Follow the [deploy instructions](deploy/README.md) to deploy Cluster Manager.
-
 ## Build
 
 #### Requirements
@@ -56,6 +53,9 @@ Project Makefile supports the following targets
 - `make build-docker` - cleans up and build docker image of Cluster Manager using docker multi-stage build.
 - `make push-image` - pushes an already created Cluster Manager docker image to registry of choice. Use `${DOCKER_REGISTRY}` environment variable to specify the registry.
 - `make build-push-image` - cleans up, build and push Cluster Manager docker image to a registry of choice. Use `${DOCKER_REGISTRY}` environment variable to specify the registry.
+
+## Deploy
+Follow the [deploy instructions](deploy/README.md) to deploy Cluster Manager.
 
 ## Community, discussion, contribution, and support
 
