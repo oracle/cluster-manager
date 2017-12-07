@@ -56,6 +56,9 @@ func TestNewOke(t *testing.T) {
 		{accessKeyIdsOne2, false},
 	}
 	for _, testData := range tests {
+		for _, accessKeyId := range accessKeyIdsAll {
+			os.Unsetenv(accessKeyId)
+		}
 		for _, accessKeyId := range testData.accessKeyIds {
 			os.Setenv(accessKeyId, accessKeyId)
 		}
@@ -75,9 +78,6 @@ func TestNewOke(t *testing.T) {
 			}
 		} else if err == nil {
 			t.Errorf("OKE expects error, but did not get one!")
-		}
-		for _, accessKeyId := range testData.accessKeyIds {
-			os.Unsetenv(accessKeyId)
 		}
 	}
 }

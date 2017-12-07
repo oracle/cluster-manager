@@ -363,6 +363,8 @@ func TestNewAwsKops(t *testing.T) {
 	defaultMasterZonesStr := "us-west-1a, us-west-2a"
 	defaultMasterZones := strings.Split(defaultMasterZonesStr, ",")
 	for _, test := range tests {
+		os.Unsetenv(AWSAccessKeyId)
+		os.Unsetenv(AWSSecretAccessKeyId)
 		for _, accessKeyId := range test.accessKeyIds {
 			os.Setenv(accessKeyId, accessKeyId)
 		}
@@ -372,8 +374,6 @@ func TestNewAwsKops(t *testing.T) {
 			DefaultNodeZones:   defaultNodeZonesStr,
 			KopsStateStore:     test.kopsStateStore,
 		})
-		os.Unsetenv(AWSAccessKeyId)
-		os.Unsetenv(AWSSecretAccessKeyId)
 		if test.expectsSuccess {
 			if err != nil {
 				t.Errorf("NewAwsKops expects no error, but got one: %s!", err)

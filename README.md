@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/oracle/cluster-manager)](https://goreportcard.com/report/github.com/oracle/cluster-manager)
+
 # Cluster Manager
 
 Cluster Manager manages the life cycle of Kubernetes clusters from different cloud providers.
