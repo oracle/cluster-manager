@@ -7,11 +7,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 - Read [Set up Cluster Federation with Kubefed](https://kubernetes.io/docs/tasks/federation/set-up-cluster-federation-kubefed/) and understand how to set up a Federation.
 - This document assumes that you have a [Federation](https://kubernetes.io/docs/tasks/federation/set-up-cluster-federation-kubefed/) set up. 
-- An account with desired cloud provider must be setup for clusters to be provisioned
+- An account with desired cloud provider must be set up for clusters to be provisioned.
 - Keep the access keys and credentials ready for relevant cloud provider, for example,
     * [Follow instructions to create or manage AWS keys ](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
     * [Follow instructions to set Wercker Cluster parameters](WerckerClustersParameters.md)
-- If helm is being used, the project must be cloned so that helm templates are available for the relevant commands
+- If helm is being used, the project must be cloned so that helm templates are available for the relevant commands.
 
 
 ## Deployment using ClusterManager.yaml
@@ -135,7 +135,9 @@ examples.
         kubectl --context=$FEDERATION_HOST annotate cluster akube-oke n6s.io/cluster.lifecycle.state=pending-provision --overwrite
         ```
 
-## Provisioning an AWS Cluster
+## Examples on how to use Cluster Manager
+
+### Provisioning an AWS Cluster
 
 1. Deploy an AWS cluster to the Federation using KOPS, use [`ClusterAwsEast2.yaml`](../examples/ClusterAwsEast2.yaml)
 from examples.
@@ -166,7 +168,7 @@ from examples.
     kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-provision --overwrite
     ```
 
-## Scaling up an already provisioned cluster
+### Scaling up an already provisioned cluster
 **Note:** Do not perform these steps if you are using Navarkos. Navarkos determines on which cluster to perform the operation depending on demand and supply.
 
 - If there is more demand, you can scale up an already provisioned cluster to support more load. 
@@ -181,7 +183,7 @@ Here is an example of scaling up a previously provisioned `akube-us-east-2` AWS 
     kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-up --overwrite
     ```
 
-## Scaling down an already provisioned cluster
+### Scaling down an already provisioned cluster
 **Note:** Do not perform these steps if you are using Navarkos. Navarkos determines on which cluster to perform the operation depending on demand and supply.
 
 - If the demand is low, then you can scale down an already provisioned cluster. 
@@ -196,7 +198,7 @@ Here is an example of scaling down a previously provisioned `akube-us-east-2` AW
     kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-down --overwrite
     ```
 
-## Shutting down a provisioned cluster
+### Shutting down a provisioned cluster
 **Note:** Do not perform these steps if you are using Navarkos. Navarkos determines on which cluster to perform the operation depending on the demand and supply.
 
 - You can shut down a provisioned cluster when it is not in use. 

@@ -7,9 +7,9 @@ Cluster Manager supports provisioning, scaling up, scaling down and shutting dow
 cloud providers. The cluster lifecycle status and cloud provider specific configuration are stored as annotations into 
 the Kubernetes Cluster object in the Federation. Cluster Manager uses these annotations to decide which lifecycle
 operation to perform and how to set up the cluster. Currently AWS and Wercker Clusters are supported. Support for more
-providers will be added in the near future
+providers will be added in the near future.
 
-Cluster Manager may be used with [Navarkos](https://github.com/oracle/kubernetes-incubator/navarkos)
+Cluster Manager may be used with [Navarkos](https://github.com/oracle/navarkos)
 to help scale out deployments to various cloud providers. When Cluster Manager is used with Navarkos, Navarkos 
 determines on which cluster to perform the operation depending on the demand and supply.
 
@@ -21,7 +21,7 @@ determines on which cluster to perform the operation depending on the demand and
 
 The Cluster Manager supports the following operations on clusters:
 
-1. Provisioning: Cluster Manager can create creates a new Kubernetes cluster on a cloud provider.
+1. Provisioning: Cluster Manager can create a new Kubernetes cluster on a cloud provider.
 1. Scale Up: Cluster Manager can scale up nodes on a currently provisioned cluster on any supported cloud provider
 1. Scale Down: Cluster Manager can scale down nodes on a currently provisioned cluster on any supported cloud provider
 1. Shutdown: Cluster Manager can shutdown a currently provisioned cluster on any supported cloud provider
