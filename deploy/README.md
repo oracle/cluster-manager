@@ -55,9 +55,9 @@ environment variables.
     helm init
     ```
 
-2. Execute helm install with the following values set. Note that the following command makes a reference to helm chart in project
-(./helm/cluster-manager). Therefore this command should either run from the project directory or may refer to the helm chart
-in the project directory.
+2. Execute helm install with the following values set. Note that the following command makes a reference to helm chart
+in the project's [deploy](./) directory (./helm/cluster-manager). Therefore this command should either run from the
+deploy directory or may refer to the helm chart in the deploy directory.
     
     ```
     FEDERATION_NAMESPACE=federation-system
