@@ -148,6 +148,7 @@ from examples.
     `cluster-manager.n6s.io/cluster.config`. For valid values that are going to be used on some of the fields in
     `cluster-manager.n6s.io/cluster.config` which is used to customize the cluster, please refer to the 
     [AWS Documentation](https://aws.amazon.com/documentation):
+    
         - region - Region where  the cluster will be instantiated.
         - masterZones - List of zones where master nodes will be instantiated.
         - nodeZones - List of zones where worker nodes will be instantiated. 
