@@ -112,7 +112,7 @@ deploy directory or may refer to the helm chart in the deploy directory.
 
 ## Examples on how to use Cluster Manager
 
-## Provisioning a Wercker Cluster
+### Provisioning a Wercker Cluster
 
 1. Deploy a Wercker Cluster to the Federation, use [`ClusterOke.yaml`](../examples/ClusterOke.yaml) from
 examples.
