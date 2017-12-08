@@ -23,7 +23,7 @@ environment variables.
     export FEDERATION_HOST=fedhost
     export FEDERATION_CONTEXT=akube
     export FEDERATION_NAMESPACE=federation-system
-    export CLUSTER_MANAGER_IMAGE=/docker.io/somewhere/cluster-manager:v1
+    export CLUSTER_MANAGER_IMAGE=/docker.io/somewhere/cluster-manager:tagversion
     export AWS_ACCESS_KEY_ID=awsaccesskeyid
     export AWS_SECRET_ACCESS_KEY=awssecretaccesskey
     export OKE_BEARER_TOKEN=werckerclustersbearertoken
@@ -74,11 +74,10 @@ deploy directory or may refer to the helm chart in the deploy directory.
         --set federationContext="$FEDERATION_CONTEXT" \
         --set federationNamespace="$FEDERATION_NAMESPACE" \
         --set domain="something.fed.net" \
-        --set image.repository="docker.io/somewhere/cluster-manager" \
+        --set image.repository="docker.io/somewhere/" \
         --set image.tag="v1" \
         --set okeApiHost="api.cluster.us-ashburn-1.oracledx.com" \
         --set statestore="s3://clusters-state" \
-        --namespace "$FEDERATION_NAMESPACE" \
         --kube-context "$FEDERATION_HOST"
     ```  
         Where, 
@@ -111,6 +110,8 @@ deploy directory or may refer to the helm chart in the deploy directory.
     helm delete --kube-context $FEDERATION_HOST --purge cluster-manager
     ```
 
+## Examples on how to use Cluster Manager
+
 ## Provisioning a Wercker Cluster
 
 1. Deploy a Wercker Cluster to the Federation, use [`ClusterOke.yaml`](../examples/ClusterOke.yaml) from
@@ -134,8 +135,6 @@ examples.
         ```
         kubectl --context=$FEDERATION_HOST annotate cluster akube-oke n6s.io/cluster.lifecycle.state=pending-provision --overwrite
         ```
-
-## Examples on how to use Cluster Manager
 
 ### Provisioning an AWS Cluster
 
@@ -210,3 +209,17 @@ Here is an example of shutting down a previously provisioned `akube-us-east-2` A
     ```
     kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-shutdown --overwrite
     ```
+
+### Checking cluster status
+
+- To check the status of a specific cluster, execute the command and note the value of `n6s.io/cluster.lifecycle.state` annotation.
+
+    ```
+    kubectl --context=$FEDERATION_HOST get cluster <Cluster Name> -o yaml
+    ``` 
+    
+- To check the status of all the clusters, execute the command and note the value of `n6s.io/cluster.lifecycle.state` annotation for each of the clusters listed .
+
+    ```
+    kubectl --context=$FEDERATION_HOST get clusters -o yaml
+    ```    

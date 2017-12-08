@@ -1,20 +1,16 @@
-# Retrieving Wercker Clusters parameters
+# Setting up Wercker Clusters parameters to work with Cluster Manager
 
-1. Create Cloud Credential. Use this information for the cluster-manager's OKE_CLOUD_AUTH_ID:
-   1. Go to https://app.wercker.com/clusters/cloud-credentials
-   1. Choose which Organization to use for the Cloud Credential
-   1. Click "New Cloud Credential Button"
-   1. Provide a Name
-   1. Add all your BMC/OCI tenancy specific information (User OCID, Tenancy OCID). Get those information by logging in to OCI: https://console.us-phoenix-1.oraclecloud.com/ and then change Region to us-ashburn-1. Go to Identity to get User OCID. At the bottom of any page in OCI, you can get the Tenancy ID.
-   1. For Key Fingerprint and API Private Key (PEM Format), follow the instruction in https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm .
-   1. Once all the required information is inputted, click create and take note of the cloud credential.
-   1. The cloud credential can also be retrieved by going to Clusters->Cloud Credentials, choose the Organization and the name of your credential. From there the Cloud Auth Id can be retrieved.
-1. To get the token that will be used for OKE_BEARER_TOKEN: 
-   1. Click user icon on the top right corner of the app.wercker window.
-   1. Choose Settings->Personal Tokens and generate a new token.
-   1. Once the token is displayed, make sure to copy it as it won't be shown again.
-1. To get the OKE_AUTH_GROUP
-    1. Use this rest request ```curl -L app.wercker.com/api/v3/identity/lookup?q=<GROUP Name>```
-    1. For example ```curl -L app.wercker.com/api/v3/identity/lookup?q=GAS{"id":"59cae3bd1521710100bc1449","name":"GAS"}```
-    1. The id field value ("59cae3bd1521710100bc1449") reflects OKE_AUTH_GROUP
-1. When logged in to the OCI console, also take note of the Compartment ID. Go to Identity->Compartment and choose the compartment where the instances will be created. Use this information in the cluster's cluster-manager.n6s.io/cluster.config annotation to specify which compartment will be used by the cluster.
+If you are using [Wercker Clusters](http://devcenter.wercker.com/docs/getting-started-with-wercker-clusters#creatingcluster), you need to set the *OKE_CLOUD_AUTH_ID*,  *OKE_BEARER_TOKEN*,  *OKE_AUTH_GROUP*,  and Compartment ID parameters to work with Cluster Manager. If you do not have these parameters, then follow this document to create them.  
+
+1. When you use Wercker Clusters to create a new Kubernetes cluster, you specify Cloud Credentials to specify where you want to create the cluster. If you already have *Cloud Auth ID* and OKE_AUTH_GROUP in the **Clusters > Cloud Credentials** page in the Wercker cluster, you can use those credentials. If you have to create those IDs, then follow these steps:
+<ol type="a">
+<li>Go to https://app.wercker.com/clusters/cloud-credentials and select the Organization.</li>
+<li>Click **New Cloud Credential Button**. </li>
+<li>Enter a name.</li>
+<li>Enter all your Oracle Cloud Infrastructure (OCI) tenancy specific information (User OCID, Tenancy OCID). You can get those information by logging in to [OCI](https://console.us-phoenix-1.oraclecloud.com/) and then by changing the Region, for example, change the region to *us-ashburn-1*. Navigate to Identity and note down the User OCID and also copy the Tenancy ID, which you will find at the bottom of any page in OCI.</li>
+<li>For **Key Fingerprint** and **API Private Key (PEM Format)**, follow the instructions in https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm.</li>
+<li> Click **Create** and note down the Cloud Auth ID. The Cloud_Auth_ID is displayed in the Cloud Credentials page.</li>
+<li>In the Cloud Credentials page, note down the OKE_AUTH_GROUP, which is the ID displayed next to the Organization drop down list. 
+</ol>
+2. Create a new Wercker authentication token if you do not have one, which will be used for *OKE_BEARER_TOKEN*. See [how to get a Wercker authentication token] (http://devcenter.wercker.com/docs/getting-started-with-wercker-releases#gettingtoken) for more details.
+3. You also need a Compartment ID to specify which compartment the cluster will use. When you log in to the OCI console, go to Identity->Compartment and choose the compartment where the instances will be created. 
