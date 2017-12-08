@@ -13,4 +13,4 @@ If you are using [Wercker Clusters](http://devcenter.wercker.com/docs/getting-st
     <li>In the Cloud Credentials page, note down the OKE_AUTH_GROUP, which is the ID displayed next to the Organization drop down list. 
     </ol>
 1. Create a new Wercker authentication token if you do not have one, which will be used for *OKE_BEARER_TOKEN*. See [how to get a Wercker authentication token] (http://devcenter.wercker.com/docs/getting-started-with-wercker-releases#gettingtoken) for more details.
-1. You also need a Compartment ID to specify which compartment the cluster will use. When you log in to the OCI console, go to Identity->Compartment and choose the compartment where the instances will be created. 
+1. You also need a Compartment ID to specify which compartment the cluster will use. When you log in to the OCI console, go to Identity->Compartment and choose the compartment where the instances will be created.
