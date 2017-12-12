@@ -164,7 +164,7 @@ from examples.
     - At the end of the provisioning, the value of `n6s.io/cluster.lifecycle.state` will be changed either to `ready` if successful or `failed-up` if failed. 
 
     ```
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-provision --overwrite
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-provision --overwrite
     ```
 
 ### Scaling up an already provisioned cluster
@@ -178,8 +178,8 @@ from examples.
 Here is an example of scaling up a previously provisioned `akube-us-east-2` AWS cluster by 5
 
     ```
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 cluster-manager.n6s.io/cluster.scale-up-size=5 --overwrite && \
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-up --overwrite
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 cluster-manager.n6s.io/cluster.scale-up-size=5 --overwrite && \
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-up --overwrite
     ```
 
 ### Scaling down an already provisioned cluster
@@ -193,8 +193,8 @@ Here is an example of scaling up a previously provisioned `akube-us-east-2` AWS 
 Here is an example of scaling down a previously provisioned `akube-us-east-2` AWS cluster by 5
 
     ```
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 cluster-manager.n6s.io/cluster.scale-down-size=5 --overwrite && \
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-down --overwrite
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 cluster-manager.n6s.io/cluster.scale-down-size=5 --overwrite && \
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-down --overwrite
     ```
 
 ### Shutting down a provisioned cluster
@@ -207,7 +207,7 @@ Here is an example of scaling down a previously provisioned `akube-us-east-2` AW
 Here is an example of shutting down a previously provisioned `akube-us-east-2` AWS cluster
 
     ```
-    kubectl --context=$FEDERATION_HOST annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-shutdown --overwrite
+    kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-us-east-2 n6s.io/cluster.lifecycle.state=pending-shutdown --overwrite
     ```
 
 ### Checking cluster status
@@ -215,11 +215,11 @@ Here is an example of shutting down a previously provisioned `akube-us-east-2` A
 - To check the status of a specific cluster, execute the command and note the value of `n6s.io/cluster.lifecycle.state` annotation.
 
     ```
-    kubectl --context=$FEDERATION_HOST get cluster <Cluster Name> -o yaml
+    kubectl --context=$FEDERATION_CONTEXT get cluster <Cluster Name> -o yaml
     ``` 
     
 - To check the status of all the clusters, execute the command and note the value of `n6s.io/cluster.lifecycle.state` annotation for each of the clusters listed .
 
     ```
-    kubectl --context=$FEDERATION_HOST get clusters -o yaml
+    kubectl --context=$FEDERATION_CONTEXT get clusters -o yaml
     ```    
