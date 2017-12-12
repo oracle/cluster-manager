@@ -118,7 +118,7 @@ deploy directory or may refer to the helm chart in the deploy directory.
 examples.
 
     ```
-    kubectl --context $FEDERATION_HOST create -f ClusterOke.yaml
+    kubectl --context $FEDERATION_CONTEXT create -f ClusterOke.yaml
     ```
     This command deploys the cluster in an offline state. To customize the Wercker cluster, change the parameters in `cluster-manager.n6s.io/cluster.config` annotation of cluster. Before deploying, you can modify *ClusterOke.yaml* or use `kubectl` annotate command. The supported parameters are
 
@@ -133,7 +133,7 @@ examples.
     - At the end of the provisioning, the value of `n6s.io/cluster.lifecycle.state` will be changed either to `ready` if successful or `failed-up` if failed. 
 
         ```
-        kubectl --context=$FEDERATION_HOST annotate cluster akube-oke n6s.io/cluster.lifecycle.state=pending-provision --overwrite
+        kubectl --context=$FEDERATION_CONTEXT annotate cluster akube-oke n6s.io/cluster.lifecycle.state=pending-provision --overwrite
         ```
 
 ### Provisioning an AWS Cluster
@@ -142,7 +142,7 @@ examples.
 from examples.
                                                                                                         
     ```
-    kubectl --context $FEDERATION_HOST create -f ClusterAwsEast2.yaml
+    kubectl --context $FEDERATION_CONTEXT create -f ClusterAwsEast2.yaml
     ```
 
     This command deploys the cluster in an offline state. To customize the AWS cluster, change the parameters in
