@@ -143,10 +143,9 @@ func init() {
 }
 
 func osLookup(keyId string) error {
-	if value, ok := os.LookupEnv(keyId); !ok {
+	if _, ok := os.LookupEnv(keyId); !ok {
 		return errors.Errorf("%s env is not set, kops provider will be disabled", keyId)
 	} else {
-		glog.Infof("Using %s=%v", keyId, value)
 		return nil
 	}
 }

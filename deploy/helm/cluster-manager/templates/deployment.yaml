@@ -12,19 +12,34 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}cluster-manager:{{ .Values.image.tag }}"
+        image: "{{ .Values.image.repository }}/cluster-manager:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: AWS_ACCESS_KEY_ID
-          value: "{{ .Values.awsAccessKeyId }}"
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}-provider-access-keys
+              key: awsAccessKeyId
         - name: AWS_SECRET_ACCESS_KEY
-          value: "{{ .Values.awsSecretAccessKey }}"
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}-provider-access-keys
+              key: awsSecretAccessKey
         - name: OKE_BEARER_TOKEN
-          value: "{{ .Values.okeBearerToken }}"
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}-provider-access-keys
+              key: okeBearerToken
         - name: OKE_AUTH_GROUP
-          value: "{{ .Values.okeAuthGroup }}"
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}-provider-access-keys
+              key: okeAuthGroup
         - name: OKE_CLOUD_AUTH_ID
-          value: "{{ .Values.okeCloudAuthId }}"
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "name" . }}-provider-access-keys
+              key: okeCloudAuthId
         command:
         - /cluster-manager
         {{- if (not (empty .Values.glogLevel)) }}

@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cluster-manager-provider-access-keys
+  namespace: $FEDERATION_NAMESPACE
+type: Opaque
+data:
+  awsAccessKeyId: "$AWS_ACCESS_KEY_ID_BASE64"
+  awsSecretAccessKey: "$AWS_SECRET_ACCESS_KEY_BASE64"
+  okeBearerToken: "$OKE_BEARER_TOKEN_BASE64"
+  okeAuthGroup: "$OKE_AUTH_GROUP_BASE64"
+  okeCloudAuthId: "$OKE_CLOUD_AUTH_ID_BASE64"
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -12,19 +25,34 @@ spec:
     spec:
       containers:
       - name: cluster-manager
-        image: $CLUSTER_MANAGER_IMAGE
+        image: ${IMAGE_REPOSITORY}/cluster-manager:${IMAGE_VERSION}
         imagePullPolicy: Always
         env:
         - name: AWS_ACCESS_KEY_ID
-          value: "$AWS_ACCESS_KEY_ID"
+          valueFrom:
+            secretKeyRef:
+              name: cluster-manager-provider-access-keys
+              key: awsAccessKeyId
         - name: AWS_SECRET_ACCESS_KEY
-          value: "$AWS_SECRET_ACCESS_KEY"
+          valueFrom:
+            secretKeyRef:
+              name: cluster-manager-provider-access-keys
+              key: awsSecretAccessKey
         - name: OKE_BEARER_TOKEN
-          value: "$OKE_BEARER_TOKEN"
+          valueFrom:
+            secretKeyRef:
+              name: cluster-manager-provider-access-keys
+              key: okeBearerToken
         - name: OKE_AUTH_GROUP
-          value: "$OKE_AUTH_GROUP"
+          valueFrom:
+            secretKeyRef:
+              name: cluster-manager-provider-access-keys
+              key: okeAuthGroup
         - name: OKE_CLOUD_AUTH_ID
-          value: "$OKE_CLOUD_AUTH_ID"
+          valueFrom:
+            secretKeyRef:
+              name: cluster-manager-provider-access-keys
+              key: okeCloudAuthId
         command:
         - /cluster-manager
         - --v=2

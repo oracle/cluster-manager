@@ -14,34 +14,53 @@ These instructions will get you a copy of the project up and running on your loc
 - If helm is being used, the project must be cloned so that helm templates are available for the relevant commands.
 
 
-## Deployment using ClusterManager.yaml
+## Deployment using ClusterManagerTemplate.yaml
 
-1. Use `kubectl` to create a deployment using [`ClusterManager.yaml`](../examples/ClusterManager.yaml). Set the required
-environment variables.
+1. Create a yaml deployment file using [`ClusterManagerTemplate.yaml`](../examples/ClusterManagerTemplate.yaml). For example,
+you can use a bash script to set the required environment variables and generate a new file called `ClusterManager.yaml`.
 
     ```
+    #!/bin/bash
+    
     export FEDERATION_HOST=fedhost
     export FEDERATION_CONTEXT=akube
     export FEDERATION_NAMESPACE=federation-system
-    export CLUSTER_MANAGER_IMAGE=/docker.io/somewhere/cluster-manager:tagversion
+    export IMAGE_REPOSITORY=someregistry.io/somewhere
+    export IMAGE_VERSION=tagversion
+    export DOMAIN=something.net
+    export KOPS_STATE_STORE=s3://state-store.something.net
     export AWS_ACCESS_KEY_ID=awsaccesskeyid
     export AWS_SECRET_ACCESS_KEY=awssecretaccesskey
     export OKE_BEARER_TOKEN=werckerclustersbearertoken
     export OKE_AUTH_GROUP=werckerclustersauthgroup
     export OKE_CLOUD_AUTH_ID=werckerclusterscloudauthid
-    export DOMAIN=something.net
-    export KOPS_STATE_STORE=state-store.something.net
      
+    # Convert API access keys to base64 for K8s secret storage 
+    export AWS_ACCESS_KEY_ID_BASE64=$(echo -n "$AWS_ACCESS_KEY_ID" | base64)
+    export AWS_SECRET_ACCESS_KEY_BASE64=$(echo -n "$AWS_SECRET_ACCESS_KEY" | base64)
+    export OKE_BEARER_TOKEN_BASE64=$(echo -n "$OKE_BEARER_TOKEN" | base64)
+    export OKE_AUTH_GROUP_BASE64=$(echo -n "$OKE_AUTH_GROUP" | base64)
+    export OKE_CLOUD_AUTH_ID_BASE64=$(echo -n "$OKE_CLOUD_AUTH_ID" | base64)
+     
+    # Generate a new ClusterManager.yaml using ClusterManagerTemplate.yaml and above env. variables
+    eval "cat <<EOF
+    $(<ClusterManagerTemplate.yaml)
+    EOF" > ClusterManager.yaml  
+    ```
+
+1. Use `kubectl` to deploy the generated `ClusterManager.yaml`.
+     
+    ``` 
     kubectl --context $FEDERATION_HOST create -f ClusterManager.yaml
     ```
 
-2. Verify if Cluster Manager is installed.
+1. Verify if Cluster Manager is installed.
     
     ```
     kubectl --context $FEDERATION_HOST get pods --all-namespaces | grep cluster-manager
     ```
 
-3. (Optional) Uninstall Cluster Manager.
+1. (Optional) Uninstall Cluster Manager.
     
     ```
     kubectl --context $FEDERATION_HOST delete -f ClusterManager.yaml
@@ -74,7 +93,7 @@ deploy directory or may refer to the helm chart in the deploy directory.
         --set federationContext="$FEDERATION_CONTEXT" \
         --set federationNamespace="$FEDERATION_NAMESPACE" \
         --set domain="something.fed.net" \
-        --set image.repository="docker.io/somewhere/" \
+        --set image.repository="someregistry.io/somewhere" \
         --set image.tag="v1" \
         --set okeApiHost="api.cluster.us-ashburn-1.oracledx.com" \
         --set statestore="s3://clusters-state" \
