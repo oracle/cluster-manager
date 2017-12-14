@@ -21,7 +21,7 @@ federationNamespace:
 domain: domain.change.me
 statestore:
 
-# OKE connection paramters
+# OKE connection parameters
 okeApiHost:
 
 # Log Level

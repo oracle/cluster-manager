@@ -119,20 +119,17 @@ func NewOke(config *options.ClusterControllerOptions) (*Oke, error) {
 
 	if bearer, ok := os.LookupEnv(OkeBearerToken); ok {
 		oke.okeBearer = OkeBearerPrefix + bearer
-		glog.Infof("Using OKE_BEARER_TOKEN=%v", oke.okeBearer)
 	} else {
 		return nil, errors.Errorf("Env var %v is required by OKE provider, OKE clusters will not be provisioned", OkeBearerToken)
 	}
 
 	if authGroup, ok := os.LookupEnv(OkeAuthGroup); ok {
 		oke.okeAuthGroup = authGroup
-		glog.Infof("Using OKE_AUTH_GROUP=%v", oke.okeAuthGroup)
 	} else {
 		return nil, errors.Errorf("Env var %v is required by OKE provider, OKE clusters will not be provisioned", OkeAuthGroup)
 	}
 	if defaultCloudAuthId, ok := os.LookupEnv(OkeDefaultCloudAuthId); ok {
 		oke.okeDefaultCloudAuthId = defaultCloudAuthId
-		glog.Infof("Using OKE_CLOUD_AUTH_ID=%v", defaultCloudAuthId)
 	}
 
 	return oke, nil

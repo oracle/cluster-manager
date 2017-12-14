@@ -5,7 +5,7 @@ If you are using [Wercker Clusters](http://devcenter.wercker.com/docs/getting-st
 1. When you use Wercker Clusters to create a new Kubernetes cluster, you specify Cloud Credentials to specify where you want to create the cluster. If you already have *Cloud Auth ID* and OKE_AUTH_GROUP in the **Clusters > Cloud Credentials** page in the Wercker cluster, you can use those credentials. If you have to create those IDs, then follow these steps:
     <ol type="a">
     <li>Go to https://app.wercker.com/clusters/cloud-credentials and select the Organization.</li>
-    <li>Click <B>New Cloud Credential Button</B>. </li>
+    <li>Click <B>New Cloud Credential</B>. </li>
     <li>Enter a name.</li>
     <li>Enter all your Oracle Cloud Infrastructure (OCI) tenancy specific information (User OCID, Tenancy OCID). You can get those information by logging in to [OCI](https://console.us-phoenix-1.oraclecloud.com/) and then by changing the Region, for example, change the region to *us-ashburn-1*. Navigate to Identity and note down the User OCID and also copy the Tenancy ID, which you will find at the bottom of any page in OCI.</li>
     <li>For <B>Key Fingerprint</B> and <B>API Private Key (PEM Format)</B>, follow the instructions in https://docs.us-phoenix-1.oraclecloud.com/Content/API/Concepts/apisigningkey.htm.</li>
