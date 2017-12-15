@@ -36,11 +36,8 @@ build:
           make vendor
           make coverhtml
 
-  # after-steps:
-  #   - internal/docker-push:
-  #        username: $WCR_USERNAME
-  #        password: $WCR_PASSWORD
-  #        repository: wcr.io/gam/federation
-  #        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
-  #        working-dir: /pipeline/source
-  #        entrypoint: /federatedingress-controller
+  after-steps:
+    - internal/docker-push:
+         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+         working-dir: /pipeline/source
+         entrypoint: /cluster-manager
