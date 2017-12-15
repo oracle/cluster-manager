@@ -35,3 +35,4 @@ build:
          tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
          working-dir: /pipeline/source
          entrypoint: /cluster-manager
+
