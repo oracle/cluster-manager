@@ -1,3 +1,4 @@
+[![wercker status](https://app.wercker.com/status/3ca06970c31b5411969bf6d7540d3738/s/master "wercker status")](https://app.wercker.com/project/byKey/3ca06970c31b5411969bf6d7540d3738)
 [![Go Report Card](https://goreportcard.com/badge/github.com/oracle/cluster-manager)](https://goreportcard.com/report/github.com/oracle/cluster-manager)
 
 # Cluster Manager
