@@ -22,12 +22,6 @@ build:
           cd $WERCKER_OUTPUT_DIR/bin/linux
           ls -la
 
-    # Test the project
-    - script:
-        name: go test
-        code: |
-          go test ./...
-
     # code coverage
     - script:
         name: code coverage
